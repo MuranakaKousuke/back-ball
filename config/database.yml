@@ -1,0 +1,20 @@
+default: &default
+  adapter: postgresql
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
+  encoding: unicode # 追加
+  username: kousuke
+  password:
+  host: localhost
+
+development:
+  <<: *default
+  database: baseball_development
+
+test:
+  <<: *default
+  database: baseball_test
+
+# Herokuデプロイ時に再度見直す
+production:
+  <<: *default
