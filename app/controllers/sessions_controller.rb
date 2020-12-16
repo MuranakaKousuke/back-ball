@@ -1,9 +1,9 @@
 class SessionsController < ApplicationController
   def create
-    user = User.find_by(name: session_params[:name])
+    team = Team.find_by(email: session_params[:email])
 
-    if user&.authenticate(session_params[:password])
-      render json: { login: true, id: user.id, name: user.name }
+    if team&.authenticate(session_params[:password])
+      render json: { login: true, id: team.id, email: team.email }
     else
       render json: { login: false }
     end
@@ -15,6 +15,6 @@ class SessionsController < ApplicationController
 
   private
   def session_params
-    params.permit(:name, :password)
+    params.permit(:email, :password)
   end
 end
