@@ -3,7 +3,14 @@ class SessionsController < ApplicationController
     team = Team.find_by(email: session_params[:email])
 
     if team&.authenticate(session_params[:password])
-      render json: { login: true, id: team.id, email: team.email }
+      render json: {
+        login: true,
+        id: team.id,
+        name: team.name,
+        town: team.town,
+        introduction: team.introduction,
+        prefectureId: team.prefecture_id
+      }
     else
       render json: { login: false }
     end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_18_070248) do
+ActiveRecord::Schema.define(version: 2020_12_18_072824) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,12 @@ ActiveRecord::Schema.define(version: 2020_12_18_070248) do
     t.string "password_digest", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "name", default: "チーム名未設定", null: false
+    t.string "town", default: "地域未設定", null: false
+    t.string "introduction", default: "チーム紹介未設定", null: false
+    t.bigint "prefecture_id", default: 48
+    t.index ["prefecture_id"], name: "index_teams_on_prefecture_id"
   end
 
+  add_foreign_key "teams", "prefectures"
 end
